@@ -1,25 +1,31 @@
 console.log(data);
 
 // WRITE YOUR CODE BELOW!
-const dogsList = document.querySelector(".dogs-list")
-const main = document.querySelector(".main")
+const dogsList = document.querySelector(".dogs-list");
+const formButton = document.querySelector(".dogs-list__button--add");
+const main = document.querySelector(".main");
 
+console.log(formButton);
 
-data.forEach((dog)=>{
-    const li = document.createElement("li")
-    li.classList.add("dogs-list__button")
-    li.innerText = dog.name
-    dogsList.append(li)
+data.forEach((dog) => {
+  const li = document.createElement("li");
+  li.classList.add("dogs-list__button");
+  li.innerText = dog.name;
+  dogsList.append(li);
 
-    li.addEventListener('click', (e)=>{
-        const dogHtml = dogCard(dog)
-        main.innerHTML = dogHtml
-    })
-})
+  li.addEventListener("click", (e) => {
+    const dogHtml = dogCard(dog);
+    main.innerHTML = dogHtml;
+  });
+});
 
-function dogCard(dog){
+formButton.addEventListener("click", () => {
+  const form = addForm();
+  main.innerHTML = form;
+});
 
-    return `
+function dogCard(dog) {
+  return `
         <section class="main__dog-section">
             <h2>${dog.name}</h2>
             <img
@@ -35,6 +41,25 @@ function dogCard(dog){
             <p><em>Is naughty?</em> yes!</p>
             <button>Good dog!</button>
         </section>
+    `;
+}
 
-    `
+function addForm() {
+  return ` 
+  <section class="main__dog-section">
+    <h2>Add a new Dog</h2>
+    <form class="form">
+
+      <label for="name">Dog's name</label>
+      <input type="text" id="name" name="name">
+
+      <label for="image">Dog's picture</label>
+      <input type="url" id="image" name="image">
+
+       <label for="bio">Dog's bio</label>
+       <textarea rows="5" id="bio" name="bio"></textarea>
+
+       <input type="submit" id="submit" name="submit" value="Let's add a dog!" class="form__button">
+    </form>
+  </section>`;
 }
