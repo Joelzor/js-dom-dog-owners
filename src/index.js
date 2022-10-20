@@ -1,4 +1,4 @@
-console.log(data);
+// console.log(data);
 
 // WRITE YOUR CODE BELOW!
 const dogsList = document.querySelector(".dogs-list");
@@ -15,6 +15,22 @@ function generateDogs() {
     li.addEventListener("click", () => {
       const dogHtml = dogCard(dog);
       main.innerHTML = dogHtml;
+
+      const button = document.querySelector(".btn");
+
+      // toggle good dog/ bad dog button
+      button.addEventListener("click", (e) => {
+        const p = document.querySelector(".good-dog");
+        const text = button.innerText;
+        if (text === "Good dog!") {
+          p.innerHTML = `<p><em>Is naughty?</em> no</p>`;
+          button.innerText = "Bad dog!";
+        }
+        if (text === "Bad dog!") {
+          p.innerHTML = `<p><em>Is naughty?</em> yes</p>`;
+          button.innerText = "Good dog!";
+        }
+      });
     });
   });
 }
@@ -74,8 +90,10 @@ function dogCard(dog) {
                     ${dog.bio}
                 </p>
             </div class="main__dog-section__btn">
-            <p><em>Is naughty?</em> ${dog.isGoodDog ? "yes" : "no"}</p>
-            <button>Good dog!</button>
+            <p class='good-dog'><em>Is naughty?</em> ${
+              dog.isGoodDog ? "yes" : "no"
+            }</p>
+            ${buttonToggle(dog.isGoodDog)}
         </section>
     `;
 }
@@ -98,4 +116,10 @@ function addForm() {
        <input type="submit" id="submit" name="submit" value="Let's add a dog!" class="form__button">
     </form>
   </section>`;
+}
+
+function buttonToggle(isGoodDog) {
+  // if isGoodDog === true, do something to the button
+  if (!isGoodDog) return "<button class='btn'>Good dog!</button>";
+  if (isGoodDog) return "<button class='btn'>Bad dog!</button>";
 }
