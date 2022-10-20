@@ -132,6 +132,7 @@ img {
 .main__dog-section button {
   padding: 1rem;
   font-size: 1.2rem;
+  /* width: 125px; */
 
   background-color: var(--blue);
   color: var(--white);

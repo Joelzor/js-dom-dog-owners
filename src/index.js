@@ -5,12 +5,18 @@ const dogsList = document.querySelector(".dogs-list");
 const formButton = document.querySelector(".dogs-list__button--add");
 const main = document.querySelector(".main");
 
+function createDog(dog) {
+  const li = document.createElement("li");
+  li.classList.add("dogs-list__button");
+  li.innerText = dog.name;
+  dogsList.append(li);
+
+  return li;
+}
+
 function generateDogs() {
   data.forEach((dog) => {
-    const li = document.createElement("li");
-    li.classList.add("dogs-list__button");
-    li.innerText = dog.name;
-    dogsList.append(li);
+    const li = createDog(dog);
 
     li.addEventListener("click", () => {
       const dogHtml = dogCard(dog);
@@ -23,11 +29,11 @@ function generateDogs() {
         const p = document.querySelector(".good-dog");
         const text = button.innerText;
         if (text === "Good dog!") {
-          p.innerHTML = `<p><em>Is naughty?</em> no</p>`;
+          p.innerHTML = `<p><em>Is naughty?</em> yes</p>`;
           button.innerText = "Bad dog!";
         }
         if (text === "Bad dog!") {
-          p.innerHTML = `<p><em>Is naughty?</em> yes</p>`;
+          p.innerHTML = `<p><em>Is naughty?</em> no</p>`;
           button.innerText = "Good dog!";
         }
       });
@@ -64,10 +70,7 @@ formButton.addEventListener("click", () => {
     //   <li class="dogs-list__button dogs-list__button--add">+</li>
     // `;
 
-    const li = document.createElement("li");
-    li.classList.add("dogs-list__button");
-    li.innerText = dogObject.name;
-    dogsList.append(li);
+    const li = createDog(dogObject);
 
     li.addEventListener("click", () => {
       const dogHtml = dogCard(dogObject);
@@ -89,11 +92,11 @@ function dogCard(dog) {
                 <p>
                     ${dog.bio}
                 </p>
-            </div class="main__dog-section__btn">
+            </div>
             <p class='good-dog'><em>Is naughty?</em> ${
               dog.isGoodDog ? "yes" : "no"
             }</p>
-            ${buttonToggle(dog.isGoodDog)}
+            ${buttonToggle(dog.isGoodDog)} 
         </section>
     `;
 }
