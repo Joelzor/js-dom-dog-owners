@@ -12,7 +12,7 @@ function generateDogs() {
     li.innerText = dog.name;
     dogsList.append(li);
 
-    li.addEventListener("click", (e) => {
+    li.addEventListener("click", () => {
       const dogHtml = dogCard(dog);
       main.innerHTML = dogHtml;
     });
@@ -32,6 +32,7 @@ formButton.addEventListener("click", () => {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+
     const dogName = dogNameInput.value;
     const dogImage = dogImageInput.value;
     const dogBio = dogBioInput.value;
@@ -42,11 +43,20 @@ formButton.addEventListener("click", () => {
       bio: dogBio,
     };
 
-    data.push(dogObject);
-    dogsList.innerHTML = `
-    <li class="dogs-list__button dogs-list__button--add">+</li>
-  `;
-    generateDogs();
+    // data.push(dogObject);
+    // dogsList.innerHTML = `
+    //   <li class="dogs-list__button dogs-list__button--add">+</li>
+    // `;
+
+    const li = document.createElement("li");
+    li.classList.add("dogs-list__button");
+    li.innerText = dogObject.name;
+    dogsList.append(li);
+
+    li.addEventListener("click", () => {
+      const dogHtml = dogCard(dogObject);
+      main.innerHTML = dogHtml;
+    });
   });
 });
 
@@ -64,7 +74,7 @@ function dogCard(dog) {
                     ${dog.bio}
                 </p>
             </div class="main__dog-section__btn">
-            <p><em>Is naughty?</em> yes!</p>
+            <p><em>Is naughty?</em> ${dog.isGoodDog ? "yes" : "no"}</p>
             <button>Good dog!</button>
         </section>
     `;
